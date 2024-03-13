@@ -36,7 +36,7 @@ const addOrganization = async (token, orgId, passkey, handleError) => {
     if (response.status === 200) {
       return response.data;
     }
-    return handleError(response.data.errro);
+    return handleError(response.data.error);
   } catch (error) {
     return handleError(error.message);
   }
