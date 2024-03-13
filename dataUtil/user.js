@@ -26,4 +26,20 @@ const loginUser = async (fields, handleError) => {
   }
 };
 
-export { addUser, loginUser };
+const addOrganization = async (token, orgId, passkey, handleError) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  try {
+    const response = await axios.post(`${BASE_URL}/organizations/${orgId}/users`, { passkey }, config);
+    if (response.status === 200) {
+      return response.data;
+    }
+    return handleError(response.data.errro);
+  } catch (error) {
+    return handleError(error.message);
+  }
+};
+
+export { addUser, loginUser, addOrganization };
