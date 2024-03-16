@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import useWebSocket from 'react-use-websocket';
 
 export default function App() {
+  const { sendJsonMessage, lastMessage } = useWebSocket(process.env.EXPO_PUBLIC_WS_URL);
+  useEffect(() => {
+    sendJsonMessage({
+    });
+  });
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Text>{lastMessage != null ? lastMessage.data : 'fail'}</Text>
+      <Text>hello query</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
