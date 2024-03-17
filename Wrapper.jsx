@@ -5,6 +5,6 @@ import { TicketContext } from './context/TicketContext';
 export default function Wrapper() {
   const tickets = useContext(TicketContext);
   return (
-    <Text>hi</Text>
+    <Text>{tickets[0].user}</Text>
   );
 }
