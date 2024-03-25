@@ -1,7 +1,7 @@
 const tokenReducer = (state, action) => {
   switch (action.type) {
     case 'set':
-      return `Bearer ${action.contents}`;
+      return action.contents;
     default:
       return state;
   }

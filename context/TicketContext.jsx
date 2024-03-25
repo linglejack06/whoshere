@@ -9,20 +9,20 @@ import useSocket from '../utils/useSocket';
 export const TicketContext = createContext([]);
 
 export default function TicketContextProvider({ children }) {
-  const [tickets, ticketDispatch] = useReducer(ticketReducer, []);
+  const [tickets, dispatch] = useReducer(ticketReducer, null);
   const { lastJsonMessage, readyState } = useSocket();
 
   useEffect(() => {
-    if (lastJsonMessage && readyState === ReadyState.OPEN) {
-      ticketDispatch({
+    if ((lastJsonMessage && lastJsonMessage.type === 'all_tickets') && readyState === ReadyState.OPEN) {
+      dispatch({
         type: 'all',
-        contents: lastJsonMessage,
+        contents: lastJsonMessage.contents,
       });
     }
   }, [lastJsonMessage]);
 
   return (
-    <TicketContext.Provider value={[tickets, ticketDispatch]}>
+    <TicketContext.Provider value={[tickets, dispatch]}>
       {children}
     </TicketContext.Provider>
   );

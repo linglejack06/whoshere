@@ -3,7 +3,7 @@ const ticketReducer = (state, action) => {
     case 'all':
       return action.contents;
     default:
-      return action.contents;
+      return state;
   }
 };
 

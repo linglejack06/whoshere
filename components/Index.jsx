@@ -4,17 +4,19 @@ import { View, Text } from 'react-native';
 import Wrapper from '../Wrapper';
 import useSocket from '../utils/useSocket';
 import { ErrorContext } from '../context/ErrorContext';
+import { TokenContext } from '../context/TokenContexxt';
 
 export default function Index() {
   const [error] = useContext(ErrorContext);
   const { sendJsonMessage, readyState } = useSocket();
+  const [token] = useContext(TokenContext);
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
       console.log('sending auth');
       sendJsonMessage({
         type: 'auth',
-        fields: { token: '1345' },
+        fields: { token },
       });
     }
   }, [readyState]);
@@ -22,6 +24,7 @@ export default function Index() {
   return (
     <View>
       <Text>{error}</Text>
+      <Wrapper />
     </View>
   );
 }
