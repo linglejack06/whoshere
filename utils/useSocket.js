@@ -1,12 +1,13 @@
 import useWebSocket from 'react-use-websocket';
 import { useContext } from 'react';
+import { Platform } from 'react-native';
 import { ErrorContext } from '../context/ErrorContext';
 
 const useSocket = () => {
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useContext(ErrorContext);
   return useWebSocket(
-    process.env.EXPO_PUBLIC_WS_URL,
+    Platform.OS === 'ios' ? process.env.EXPO_PUBLIC_WS_IOS_URL : process.env.EXPO_PUBLIC_WS_ANDROID_URL,
     {
       share: true,
       onMessage: (msg) => {

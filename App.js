@@ -1,4 +1,5 @@
 import { PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
 import TicketContextProvider from './context/TicketContext';
 import Index from './components/Index';
 import ErrorContextProvider from './context/ErrorContext';
@@ -9,9 +10,11 @@ export default function App() {
     <ErrorContextProvider>
       <TokenContextProvider>
         <TicketContextProvider>
-          <PaperProvider>
-            <Index />
-          </PaperProvider>
+          <NavigationContainer>
+            <PaperProvider>
+              <Index />
+            </PaperProvider>
+          </NavigationContainer>
         </TicketContextProvider>
       </TokenContextProvider>
     </ErrorContextProvider>
